@@ -8,23 +8,30 @@ public class Wheel : MonoBehaviour
     public float suspensionDistance = 1;
     public float contactDepth = 0;
 
+    public float wheelMass = 20;
+
+    public float wheelPosition = 0;
+
     public float wheelRadius = 1;
     public float damper = 1;
 
     public Vector3 weight;
-    public Rigidbody main;
+    public Rigidbody car;
 
     public LayerMask hitLayer;
     private float minLength = 0;
     private float maxLength = 0;
 
+    public float sidewaysFriction = 1;
+    public Vector3 frictionForce;
+    public Vector3 forwardVelocity;
 
     void Start()
     {
         minLength = -suspensionDistance / 2;
         maxLength = suspensionDistance / 2;
-        main = transform.root.GetComponent<Rigidbody>();
-        weight = main.centerOfMass * main.mass;
+        car = transform.root.GetComponent<Rigidbody>();
+        weight = car.centerOfMass * car.mass;
     }
 
     public float lastContactDepth = 0;
@@ -41,8 +48,19 @@ public class Wheel : MonoBehaviour
             contactDepth = Mathf.Clamp(hit.distance - wheelRadius, minLength, maxLength);
             contactSpeed = (lastContactDepth - contactDepth) / Time.fixedDeltaTime;
 
-            float springForce = -contactDepth * stiffness + damper * contactSpeed;
-            main.AddForceAtPosition(transform.up * springForce, transform.position);
+            //k = -fx
+            float k = -contactDepth * stiffness + damper * contactSpeed;
+            Vector3 springForce = transform.up * k;
+
+            wheelPosition = -contactDepth;
+
+            frictionForce = car.transform.TransformDirection(
+                car.transform.right * 
+                sidewaysFriction * 
+                car.transform.InverseTransformDirection(car.velocity).z
+            );
+
+            car.AddForceAtPosition(springForce - frictionForce * sidewaysFriction, transform.position);
 
         }
     }
