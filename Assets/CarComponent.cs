@@ -13,13 +13,15 @@ public class CarComponent : MonoBehaviour
     public Transform wheelMeshparent;
 
     public float forwardTorque = 100;
-    public float brakesMax = 0.001f;
+    public float brakesMax = 1;
 
     public float maxSteer = 25;
 
 
     void Start()
     {
+        UnityEditor.SceneView.FocusWindowIfItsOpen(typeof(UnityEditor.SceneView));
+
         foreach (Wheel wheelCollider in wheelColliders)
         {
             GameObject instance = Instantiate(wheelMesh, wheelCollider.transform.position, wheelMesh.transform.rotation);
@@ -29,16 +31,21 @@ public class CarComponent : MonoBehaviour
         }
     }
 
+    float angleLeft = 0;
+    float angleRight = 0;
+
     void Update()
     {
         float forward = Input.GetAxis("Vertical");
-        float sideWays = Input.GetAxis("Horizontal");
+        float steer = Input.GetAxis("Horizontal");
 
         float brakes = 0;
         if (Input.GetKey(KeyCode.Space))
         {
             brakes = brakesMax;
         }
+
+
 
         for(int i = 0; i < wheelObjs.Count; i++)
         {
@@ -54,7 +61,7 @@ public class CarComponent : MonoBehaviour
 
             if (wc.isSteer)
             {
-                wc.steerAngle = Mathf.Clamp(Mathf.Rad2Deg * Mathf.Asin(sideWays), -maxSteer, maxSteer);
+                wc.steerAngle = Mathf.Clamp(Mathf.Rad2Deg * Mathf.Asin(steer), -maxSteer, maxSteer);
                 Vector3 rot = wheel.transform.localRotation.eulerAngles;
                 rot.y = wc.wheelAngle;
                 wheel.transform.localRotation = Quaternion.Euler(rot);

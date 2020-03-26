@@ -37,6 +37,10 @@ public class Wheel : MonoBehaviour
     public bool isSteer;
     public float steerSpeed = 10;
 
+    public float intraFriction = 100;
+
+    public bool drive = false;
+
     void Start()
     {
         minLength = -suspensionDistance / 2;
@@ -74,37 +78,27 @@ public class Wheel : MonoBehaviour
             contactSpeed = (lastContactDepth - contactDepth) / Time.fixedDeltaTime;
 
             //f = -kx
-            float f = -contactDepth * stiffness + damper * contactSpeed;
-            Vector3 springForce = transform.up * f;
+            float springForceScalar = -contactDepth * stiffness + damper * contactSpeed;
+            Vector3 springForce = transform.up * springForceScalar;
 
             wheelPosition = -contactDepth;
 
-            Vector3 sidewaysFrictionForce = car.transform.TransformDirection(
-                Vector3.forward *
-                -sidewaysFriction *
-                localVelocity.z
+            Vector3 forwardForce =
+                Vector3.forward * torque * (drive ? 1 : 0) -
+                Vector3.forward * car.velocity.z * intraFriction * (1 - Mathf.Clamp(torque, 0, 1)
             );
-            Vector3 forwardFrictionForce = car.transform.TransformDirection(
-                 Vector3.right *
-                 -forwardFriction *
-                 localVelocity.x
-            ) * brakes;
-            Vector3 angularFrictionForce =
-                Vector3.forward *
-                sidewaysFriction *
-                localAngularVelocity.y
-           ;
-            Vector3 forwardForce = car.transform.right * torque;
 
-            Vector3 angularVeolcity = car.angularVelocity;
-            angularVeolcity.y = 0;
-            car.angularVelocity = angularVeolcity;
+            Vector3 sidewaysFrictionForce = -transform.right * Vector3.Dot(transform.right, car.velocity) * sidewaysFriction;
+            frictionForce = sidewaysFrictionForce;
 
-            frictionForce = sidewaysFrictionForce + forwardFrictionForce;
+            Vector3 angularVelocity = car.angularVelocity;
+            angularVelocity.y = 0;
+            car.angularVelocity = angularVelocity;
 
-            Debug.DrawRay(transform.position, frictionForce, Color.blue);
+            Debug.DrawRay(transform.position, sidewaysFrictionForce, Color.red);
 
-            car.AddForceAtPosition(springForce + frictionForce + forwardForce, transform.position);
+            car.AddForceAtPosition(springForce + forwardForce + frictionForce, hit.point);
+
             forwardVelocity = car.velocity;
             lastForwardVelocity = localVelocity;
 
