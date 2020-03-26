@@ -269,7 +269,8 @@ MonoBehaviour:
   hitLayer:
     serializedVersion: 2
     m_Bits: 256
-  sidewaysFriction: 100
+  sidewaysFriction: 10000
+  forwardFriction: 10000
   frictionForce: {x: 0, y: 0, z: 0}
   forwardVelocity: {x: 0, y: 0, z: 0}
   lastContactDepth: 0
@@ -405,7 +406,8 @@ MonoBehaviour:
   hitLayer:
     serializedVersion: 2
     m_Bits: 256
-  sidewaysFriction: 100
+  sidewaysFriction: 10000
+  forwardFriction: 10000
   frictionForce: {x: 0, y: 0, z: 0}
   forwardVelocity: {x: 0, y: 0, z: 0}
   lastContactDepth: 0
@@ -465,7 +467,8 @@ MonoBehaviour:
   hitLayer:
     serializedVersion: 2
     m_Bits: 256
-  sidewaysFriction: 100
+  sidewaysFriction: 10000
+  forwardFriction: 10000
   frictionForce: {x: 0, y: 0, z: 0}
   forwardVelocity: {x: 0, y: 0, z: 0}
   lastContactDepth: 0
@@ -719,7 +722,8 @@ MonoBehaviour:
   hitLayer:
     serializedVersion: 2
     m_Bits: 256
-  sidewaysFriction: 100
+  sidewaysFriction: 10000
+  forwardFriction: 10000
   frictionForce: {x: 0, y: 0, z: 0}
   forwardVelocity: {x: 0, y: 0, z: 0}
   lastContactDepth: 0

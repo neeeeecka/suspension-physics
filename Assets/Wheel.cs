@@ -23,6 +23,7 @@ public class Wheel : MonoBehaviour
     private float maxLength = 0;
 
     public float sidewaysFriction = 1;
+    public float forwardFriction = 1;
     public Vector3 frictionForce;
     public Vector3 forwardVelocity;
 
@@ -48,20 +49,38 @@ public class Wheel : MonoBehaviour
             contactDepth = Mathf.Clamp(hit.distance - wheelRadius, minLength, maxLength);
             contactSpeed = (lastContactDepth - contactDepth) / Time.fixedDeltaTime;
 
-            //k = -fx
-            float k = -contactDepth * stiffness + damper * contactSpeed;
-            Vector3 springForce = transform.up * k;
+            //f = -kx
+            float f = -contactDepth * stiffness + damper * contactSpeed;
+            Vector3 springForce = transform.up * f;
 
             wheelPosition = -contactDepth;
 
-            frictionForce = car.transform.TransformDirection(
-                car.transform.right * 
-                sidewaysFriction * 
-                car.transform.InverseTransformDirection(car.velocity).z
-            );
+            Vector3 localVelocity = car.transform.InverseTransformDirection(car.velocity);
+            Vector3 localAngularVelocity = car.transform.InverseTransformDirection(car.angularVelocity);
 
-            car.AddForceAtPosition(springForce - frictionForce * sidewaysFriction, transform.position);
+           Vector3 sidewaysFrictionForce = car.transform.TransformDirection(
+               Vector3.forward *
+               -sidewaysFriction *
+               localVelocity.z
+           );
+           Vector3 forwardFrictionForce = car.transform.TransformDirection(
+                Vector3.right *
+                -forwardFriction *
+                localVelocity.x
+           );
+            Vector3 angularFrictionForce = 
+                Vector3.forward *
+                sidewaysFriction *
+                localAngularVelocity.y
+           ;
+            car.AddRelativeForce(angularFrictionForce);
 
+            frictionForce = sidewaysFrictionForce + forwardFrictionForce;
+
+            Debug.DrawRay(transform.position, frictionForce, Color.blue);
+            
+            car.AddForceAtPosition(springForce + frictionForce, transform.position);
+            forwardVelocity = car.velocity;
         }
     }
 }
