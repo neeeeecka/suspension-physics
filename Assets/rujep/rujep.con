@@ -1,0 +1,5 @@
+<playerControlObject name = "rujep" type="0">
+    <bundledmesh>rujep</bundledmesh>
+    <collision_mesh>rujep_collisionmesh</collision_mesh>
+    <templateTweak>rujep.tweak</templateTweak>
+</playerControlObject>
