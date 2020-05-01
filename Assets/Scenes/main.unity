@@ -176,8 +176,8 @@ MonoBehaviour:
   hitLayer:
     serializedVersion: 2
     m_Bits: 256
-  sidewaysFriction: 100
-  forwardFriction: 100
+  sidewaysFriction: 10000
+  forwardFriction: 10000
   frictionForce: {x: 0, y: 0, z: 0}
   wheelVelocity: {x: 0, y: 0, z: 0}
   brakes: 1
@@ -187,7 +187,7 @@ MonoBehaviour:
   wheelAngle: 0
   isSteer: 1
   steerSpeed: 10
-  intraFriction: 0
+  intraFriction: 100
   drive: 1
   lastContactDepth: 0
   contactSpeed: 0
@@ -352,8 +352,8 @@ MonoBehaviour:
   hitLayer:
     serializedVersion: 2
     m_Bits: 256
-  sidewaysFriction: 100
-  forwardFriction: 100
+  sidewaysFriction: 10000
+  forwardFriction: 10000
   frictionForce: {x: 0, y: 0, z: 0}
   wheelVelocity: {x: 0, y: 0, z: 0}
   brakes: 1
@@ -652,8 +652,8 @@ MonoBehaviour:
   hitLayer:
     serializedVersion: 2
     m_Bits: 256
-  sidewaysFriction: 100
-  forwardFriction: 100
+  sidewaysFriction: 10000
+  forwardFriction: 10000
   frictionForce: {x: 0, y: 0, z: 0}
   wheelVelocity: {x: 0, y: 0, z: 0}
   brakes: 1
@@ -1016,8 +1016,8 @@ MonoBehaviour:
   hitLayer:
     serializedVersion: 2
     m_Bits: 256
-  sidewaysFriction: 100
-  forwardFriction: 100
+  sidewaysFriction: 10000
+  forwardFriction: 10000
   frictionForce: {x: 0, y: 0, z: 0}
   wheelVelocity: {x: 0, y: 0, z: 0}
   brakes: 1
@@ -1027,7 +1027,7 @@ MonoBehaviour:
   wheelAngle: 0
   isSteer: 1
   steerSpeed: 10
-  intraFriction: 0
+  intraFriction: 100
   drive: 1
   lastContactDepth: 0
   contactSpeed: 0

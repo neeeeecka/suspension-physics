@@ -90,13 +90,22 @@ public class Wheel : MonoBehaviour
 
             wheelPosition = -contactDepth;
 
-            Vector3 forwardForce = (torque / wheelRadius) * transform.forward;
-            Vector3 wv = wheelVelocity;
+            Vector3 forwardMovement = (torque / wheelRadius) * transform.forward;
+            //Vector3 wv = wheelVelocity;
+            Vector3 normal = hit.normal;
 
-            Vector3 sideForce = wv * sidewaysFriction;
+            float sideDot = Vector3.Dot(car.velocity, hit.normal);
+            Vector3 sideForce = transform.right * -sideDot * sidewaysFriction;
+
+            //float forwardDot = Vector3.Dot(car.velocity, transform.forward) * torque;
+            //Vector3 forwardForce = transform.forward * -forwardDot * intraFriction;
+
             Debug.DrawRay(hit.point, sideForce, Color.green);
+            Debug.DrawRay(hit.point, car.velocity, Color.blue);
 
-            car.AddForceAtPosition(springForce + forwardForce, hit.point);
+            Debug.Log(car.velocity);
+
+            car.AddForceAtPosition(springForce + forwardMovement, hit.point);
 
 
         }
