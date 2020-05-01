@@ -25,7 +25,7 @@ public class Wheel : MonoBehaviour
     public float sidewaysFriction = 1;
     public float forwardFriction = 1;
     public Vector3 frictionForce;
-    public Vector3 forwardVelocity;
+    public Vector3 wheelVelocity;
 
     public float brakes = 1;
 
@@ -60,6 +60,8 @@ public class Wheel : MonoBehaviour
         transform.localRotation = Quaternion.Euler(transform.up * wheelAngle);
     }
 
+    Vector3 lastPosition;
+
     void FixedUpdate()
     {
         //Vector3 dist = (transform.localPosition - car.centerOfMass);
@@ -67,10 +69,10 @@ public class Wheel : MonoBehaviour
         //Debug.Log(dist.magnitude);
         //weight = dist.magnitude * car.mass;
 
-        Vector3 localVelocity = car.transform.InverseTransformDirection(car.velocity);
-        Vector3 localAngularVelocity = car.transform.InverseTransformDirection(car.angularVelocity);
+        wheelVelocity = (transform.position - lastPosition) * Time.fixedDeltaTime;
+        lastPosition = transform.position;
 
-        RPM = (localVelocity.x - lastForwardVelocity.x) / wheelRadius;
+        RPM = (wheelVelocity.x - lastForwardVelocity.x) / wheelRadius;
 
         RaycastHit hit;
         Debug.DrawRay(transform.position, -transform.up * wheelRadius, Color.red);
@@ -89,13 +91,13 @@ public class Wheel : MonoBehaviour
             wheelPosition = -contactDepth;
 
             Vector3 forwardForce = (torque / wheelRadius) * transform.forward;
- 
-            //Debug.DrawRay(hit.point, forwardForce, Color.green);
+            Vector3 wv = wheelVelocity;
+
+            Vector3 sideForce = wv * sidewaysFriction;
+            Debug.DrawRay(hit.point, sideForce, Color.green);
 
             car.AddForceAtPosition(springForce + forwardForce, hit.point);
 
-            forwardVelocity = car.velocity;
-            lastForwardVelocity = localVelocity;
 
         }
     }

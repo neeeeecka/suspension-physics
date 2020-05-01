@@ -146,7 +146,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 105856795}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.733, y: -0.023, z: 1.94}
+  m_LocalPosition: {x: -0.776, y: -0.023, z: 1.94}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2047841276}
@@ -164,7 +164,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 53c4d33cb8831c248b801bda559730d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  stiffness: 100000
+  stiffness: 150000
   suspensionDistance: 1.8
   contactDepth: 0
   wheelMass: 20
@@ -176,10 +176,10 @@ MonoBehaviour:
   hitLayer:
     serializedVersion: 2
     m_Bits: 256
-  sidewaysFriction: 10000
+  sidewaysFriction: 100
   forwardFriction: 100
   frictionForce: {x: 0, y: 0, z: 0}
-  forwardVelocity: {x: 0, y: 0, z: 0}
+  wheelVelocity: {x: 0, y: 0, z: 0}
   brakes: 1
   torque: 0
   RPM: 0
@@ -187,7 +187,7 @@ MonoBehaviour:
   wheelAngle: 0
   isSteer: 1
   steerSpeed: 10
-  intraFriction: 1000
+  intraFriction: 0
   drive: 1
   lastContactDepth: 0
   contactSpeed: 0
@@ -215,7 +215,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 109310371}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0.26, z: 1.02}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1155153775}
@@ -322,7 +322,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 449118803}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.776, y: -0.031, z: -0.83}
+  m_LocalPosition: {x: -0.776, y: -0.023, z: -0.83}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2047841276}
@@ -340,7 +340,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 53c4d33cb8831c248b801bda559730d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  stiffness: 100000
+  stiffness: 70000
   suspensionDistance: 1.8
   contactDepth: 0
   wheelMass: 20
@@ -352,10 +352,10 @@ MonoBehaviour:
   hitLayer:
     serializedVersion: 2
     m_Bits: 256
-  sidewaysFriction: 10000
+  sidewaysFriction: 100
   forwardFriction: 100
   frictionForce: {x: 0, y: 0, z: 0}
-  forwardVelocity: {x: 0, y: 0, z: 0}
+  wheelVelocity: {x: 0, y: 0, z: 0}
   brakes: 1
   torque: 0
   RPM: 0
@@ -363,7 +363,7 @@ MonoBehaviour:
   wheelAngle: 0
   isSteer: 0
   steerSpeed: 10
-  intraFriction: 150
+  intraFriction: 0
   drive: 0
   lastContactDepth: 0
   contactSpeed: 0
@@ -622,7 +622,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 926496305}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.68, y: -0.027, z: -0.85}
+  m_LocalPosition: {x: 0.686, y: -0.023, z: -0.83}
   m_LocalScale: {x: -1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2047841276}
@@ -652,10 +652,10 @@ MonoBehaviour:
   hitLayer:
     serializedVersion: 2
     m_Bits: 256
-  sidewaysFriction: 10000
+  sidewaysFriction: 100
   forwardFriction: 100
   frictionForce: {x: 0, y: 0, z: 0}
-  forwardVelocity: {x: 0, y: 0, z: 0}
+  wheelVelocity: {x: 0, y: 0, z: 0}
   brakes: 1
   torque: 0
   RPM: 0
@@ -663,7 +663,7 @@ MonoBehaviour:
   wheelAngle: 0
   isSteer: 0
   steerSpeed: 10
-  intraFriction: 150
+  intraFriction: 0
   drive: 0
   lastContactDepth: 0
   contactSpeed: 0
@@ -986,7 +986,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1857724903}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.686, y: -0.023, z: 1.95}
+  m_LocalPosition: {x: 0.686, y: -0.023, z: 1.94}
   m_LocalScale: {x: -1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2047841276}
@@ -1004,7 +1004,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 53c4d33cb8831c248b801bda559730d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  stiffness: 100000
+  stiffness: 150000
   suspensionDistance: 1.8
   contactDepth: 0
   wheelMass: 20
@@ -1016,10 +1016,10 @@ MonoBehaviour:
   hitLayer:
     serializedVersion: 2
     m_Bits: 256
-  sidewaysFriction: 10000
+  sidewaysFriction: 100
   forwardFriction: 100
   frictionForce: {x: 0, y: 0, z: 0}
-  forwardVelocity: {x: 0, y: 0, z: 0}
+  wheelVelocity: {x: 0, y: 0, z: 0}
   brakes: 1
   torque: 0
   RPM: 0
@@ -1027,7 +1027,7 @@ MonoBehaviour:
   wheelAngle: 0
   isSteer: 1
   steerSpeed: 10
-  intraFriction: 150
+  intraFriction: 0
   drive: 1
   lastContactDepth: 0
   contactSpeed: 0
