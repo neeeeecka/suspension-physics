@@ -169,15 +169,15 @@ MonoBehaviour:
   contactDepth: 0
   wheelMass: 20
   wheelPosition: 0
-  wheelRadius: 0.45
+  wheelRadius: 0.4
   damper: 6000
-  weight: {x: 0, y: 0, z: 0}
+  weight: 20
   car: {fileID: 0}
   hitLayer:
     serializedVersion: 2
     m_Bits: 256
   sidewaysFriction: 10000
-  forwardFriction: 10000
+  forwardFriction: 100
   frictionForce: {x: 0, y: 0, z: 0}
   forwardVelocity: {x: 0, y: 0, z: 0}
   brakes: 1
@@ -191,6 +191,36 @@ MonoBehaviour:
   drive: 1
   lastContactDepth: 0
   contactSpeed: 0
+--- !u!1 &109310371
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 109310372}
+  m_Layer: 0
+  m_Name: com
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &109310372
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 109310371}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1155153775}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &154803280
 GameObject:
   m_ObjectHideFlags: 0
@@ -315,15 +345,15 @@ MonoBehaviour:
   contactDepth: 0
   wheelMass: 20
   wheelPosition: 0
-  wheelRadius: 0.45
+  wheelRadius: 0.4
   damper: 6000
-  weight: {x: 0, y: 0, z: 0}
+  weight: 20
   car: {fileID: 0}
   hitLayer:
     serializedVersion: 2
     m_Bits: 256
   sidewaysFriction: 10000
-  forwardFriction: 10000
+  forwardFriction: 100
   frictionForce: {x: 0, y: 0, z: 0}
   forwardVelocity: {x: 0, y: 0, z: 0}
   brakes: 1
@@ -615,15 +645,15 @@ MonoBehaviour:
   contactDepth: 0
   wheelMass: 20
   wheelPosition: 0
-  wheelRadius: 0.45
+  wheelRadius: 0.4
   damper: 6000
-  weight: {x: 0, y: 0, z: 0}
+  weight: 20
   car: {fileID: 0}
   hitLayer:
     serializedVersion: 2
     m_Bits: 256
   sidewaysFriction: 10000
-  forwardFriction: 10000
+  forwardFriction: 100
   frictionForce: {x: 0, y: 0, z: 0}
   forwardVelocity: {x: 0, y: 0, z: 0}
   brakes: 1
@@ -663,12 +693,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1155153774}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 43.51, y: 4.21, z: 65.16}
+  m_LocalPosition: {x: 60.1, y: 1.145, z: 32}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4165578880949699297}
   - {fileID: 2047841276}
   - {fileID: 1397845487}
+  - {fileID: 109310372}
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -712,6 +743,8 @@ MonoBehaviour:
   forwardTorque: 2000
   brakesMax: 1
   maxSteer: 35
+  car: {fileID: 1155153776}
+  com: {fileID: 109310372}
 --- !u!1 &1397845486
 GameObject:
   m_ObjectHideFlags: 0
@@ -976,15 +1009,15 @@ MonoBehaviour:
   contactDepth: 0
   wheelMass: 20
   wheelPosition: 0
-  wheelRadius: 0.45
+  wheelRadius: 0.4
   damper: 6000
-  weight: {x: 0, y: 0, z: 0}
+  weight: 20
   car: {fileID: 0}
   hitLayer:
     serializedVersion: 2
     m_Bits: 256
   sidewaysFriction: 10000
-  forwardFriction: 10000
+  forwardFriction: 100
   frictionForce: {x: 0, y: 0, z: 0}
   forwardVelocity: {x: 0, y: 0, z: 0}
   brakes: 1

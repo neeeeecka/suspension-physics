@@ -17,9 +17,12 @@ public class CarComponent : MonoBehaviour
 
     public float maxSteer = 25;
 
+    public Rigidbody car;
+    public Transform com;
 
     void Start()
     {
+        car = GetComponent<Rigidbody>();
         UnityEditor.SceneView.FocusWindowIfItsOpen(typeof(UnityEditor.SceneView));
 
         foreach (Wheel wheelCollider in wheelColliders)
@@ -36,6 +39,8 @@ public class CarComponent : MonoBehaviour
 
     void Update()
     {
+        car.centerOfMass = com.localPosition;
+
         float forward = Input.GetAxis("Vertical");
         float steer = Input.GetAxis("Horizontal");
 
@@ -45,7 +50,7 @@ public class CarComponent : MonoBehaviour
             brakes = brakesMax;
         }
 
-
+        
 
         for(int i = 0; i < wheelObjs.Count; i++)
         {

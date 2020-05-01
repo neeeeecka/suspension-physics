@@ -15,7 +15,7 @@ public class Wheel : MonoBehaviour
     public float wheelRadius = 1;
     public float damper = 1;
 
-    public Vector3 weight;
+    public float weight;
     public Rigidbody car;
 
     public LayerMask hitLayer;
@@ -46,7 +46,7 @@ public class Wheel : MonoBehaviour
         minLength = -suspensionDistance / 2;
         maxLength = suspensionDistance / 2;
         car = transform.root.GetComponent<Rigidbody>();
-        weight = car.centerOfMass * car.mass;
+        //weight = car.centerOfMass * car.mass;
     }
 
     public float lastContactDepth = 0;
@@ -62,6 +62,11 @@ public class Wheel : MonoBehaviour
 
     void FixedUpdate()
     {
+        //Vector3 dist = (transform.localPosition - car.centerOfMass);
+        //dist.y = 0;
+        //Debug.Log(dist.magnitude);
+        //weight = dist.magnitude * car.mass;
+
         Vector3 localVelocity = car.transform.InverseTransformDirection(car.velocity);
         Vector3 localAngularVelocity = car.transform.InverseTransformDirection(car.angularVelocity);
 
@@ -83,21 +88,11 @@ public class Wheel : MonoBehaviour
 
             wheelPosition = -contactDepth;
 
-            Vector3 forwardForce =
-                Vector3.forward * torque * (drive ? 1 : 0) -
-                Vector3.forward * car.velocity.z * intraFriction * (1 - Mathf.Clamp(torque, 0, 1)
-            );
+            Vector3 forwardForce = (torque / wheelRadius) * transform.forward;
+ 
+            //Debug.DrawRay(hit.point, forwardForce, Color.green);
 
-            Vector3 sidewaysFrictionForce = -transform.right * Vector3.Dot(transform.right, car.velocity) * sidewaysFriction;
-            frictionForce = sidewaysFrictionForce;
-
-            Vector3 angularVelocity = car.angularVelocity;
-            angularVelocity.y = 0;
-            car.angularVelocity = angularVelocity;
-
-            Debug.DrawRay(transform.position, sidewaysFrictionForce, Color.red);
-
-            car.AddForceAtPosition(springForce + forwardForce + frictionForce, hit.point);
+            car.AddForceAtPosition(springForce + forwardForce, hit.point);
 
             forwardVelocity = car.velocity;
             lastForwardVelocity = localVelocity;
