@@ -5,7 +5,7 @@ using UnityEngine;
 public class CarComponent : MonoBehaviour
 {
 
-    public List<Wheel> wheelColliders;
+    // public List<Wheel> wheelColliders;
     public List<GameObject> wheelObjs;
 
     public GameObject wheelMesh;
