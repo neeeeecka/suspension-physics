@@ -15,8 +15,9 @@ public class PhysicsWheel : MonoBehaviour
     public ColliderEtension cylinderCol;
 
     public WheelFrictionCurveSource m_forwardFriction; //Properties of tire friction in the direction the wheel is pointing in.
-
-    public Transform wheelModel;
+    public float internalFriction = 1;
+    public float RPM = 0;
+    // public Transform wheelModel;
 
     // Start is called before the first frame update
     void Start()
@@ -30,6 +31,14 @@ public class PhysicsWheel : MonoBehaviour
     float hitDistance;
 
     Vector3 lastPosition;
+
+    public float springStretch
+    {
+        get
+        {
+            return hitDistance;
+        }
+    }
 
     // Update is called once per frame
     void FixedUpdate()
@@ -55,6 +64,7 @@ public class PhysicsWheel : MonoBehaviour
         }
         Debug.DrawRay(transform.position, -transform.up * hitDistance, Color.red);
 
+        //if is grounded
         if (hitDistance != springLength)
         {
 
@@ -88,20 +98,24 @@ public class PhysicsWheel : MonoBehaviour
             // totalForce += frictionForce;
 
             CalculateSlips();
-            totalForce += wheelFriction * transform.forward * Mathf.Sign(m_forwardSlip) * m_forwardFriction.Evaluate(m_forwardSlip);
+            totalForce += 0.1f * wheelFriction * transform.forward * Mathf.Sign(m_forwardSlip) * m_forwardFriction.Evaluate(m_forwardSlip);
             totalForce -= wheelFriction * transform.right * Mathf.Sign(m_sidewaysSlip) * m_forwardFriction.Evaluate(m_sidewaysSlip);
 
+            RPM = -m_forwardSlip / (2 * Mathf.PI * radius) * 60; //rounds per second * 60 = rp minute 
+
+            // Debug.Log(m_forwardSlip);
             // rigidbody.AddForceAtPosition(frictionForce * Time.deltaTime, worldPoint);
             rigidbody.AddForceAtPosition(totalForce, transform.position);
 
             // Debug.Log(force.y);
         }
-
-        Vector3 wheelPos = wheelModel.localPosition;
-        wheelPos.y = -hitDistance + radius;
-        wheelModel.localPosition = wheelPos;
+        else
+        {
+            RPM /= 1 + internalFriction;
+        }
     }
 
+    public float forwardVel;
 
     private float m_forwardSlip;
     private float m_sidewaysSlip;
@@ -120,6 +134,8 @@ public class PhysicsWheel : MonoBehaviour
         //Calculate the forward and sideways velocity components relative to the wheel in world space
         Vector3 forwardVelocity = Vector3.Dot(velocity, forward) * forward;
         Vector3 sidewaysVelocity = Vector3.Dot(velocity, sideways) * sideways;
+
+        // forwardVel = forwardVelocity.magnitude ;
 
         //Calculate the slip velocities. 
         //Note that these values are different from the standard slip calculation.
